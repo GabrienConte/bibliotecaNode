@@ -1,3 +1,1 @@
-import chalk from "chalk";
-
-console.log(chalk.bgGreen('Olá mundo'));
+console.log('olá mundo');
