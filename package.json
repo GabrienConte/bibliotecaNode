@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Fazer uma biblioteca simples para node.js",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/GabrienConte/bibliotecaNode/issues"
   },
-  "homepage": "https://github.com/GabrienConte/bibliotecaNode#readme"
+  "homepage": "https://github.com/GabrienConte/bibliotecaNode#readme",
+  "dependencies": {
+    "chalk": "5.0.1"
+  }
 }
