@@ -5,12 +5,19 @@ function trataErro(error){
     throw new Error(chalk.red(error.code, 'Não há arquivo no diretório'));
 }
 
+function extrailinks(text) {
+    const regex = /\[([^[\]]*?)\]\((https?:\/\/[^\s?#.].[^\s]*)\)/gm;
+    const captures = [...text.matchAll(regex)];
+    const results = captures.map(capture => ({[capture[1]]: capture[2]}));
+   return results;
+}
+
 async function getArchive(pathfile) {
     const enconding = 'utf-8';
     try {
         const text = await fs.promises.readFile
         (pathfile, enconding);
-        console.log(chalk.greenBright(text));
+        console.log(extrailinks(text));
     } catch (error) {
         trataErro(error);
     } finally {
@@ -18,13 +25,4 @@ async function getArchive(pathfile) {
     }
 
 }
-
-// function getArchive(pathfile) {
-//     const enconding = 'utf-8';
-//     fs.promises
-//       .readFile(pathfile, enconding)
-//       .then((text) => console.log(chalk.greenBright(text)))
-//       .catch(trataErro);
-// }
-
 getArchive('./arquivos/texto.md');
