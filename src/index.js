@@ -9,7 +9,7 @@ function extrailinks(text) {
     const regex = /\[([^[\]]*?)\]\((https?:\/\/[^\s?#.].[^\s]*)\)/gm;
     const captures = [...text.matchAll(regex)];
     const results = captures.map(capture => ({[capture[1]]: capture[2]}));
-   return results;
+   return results.length !== 0 ? results : 'Não há links no arquivo';
 }
 
 async function getArchive(pathfile) {
@@ -17,7 +17,7 @@ async function getArchive(pathfile) {
     try {
         const text = await fs.promises.readFile
         (pathfile, enconding);
-        console.log(extrailinks(text));
+        return extrailinks(text);
     } catch (error) {
         trataErro(error);
     } finally {
@@ -25,4 +25,5 @@ async function getArchive(pathfile) {
     }
 
 }
-getArchive('./arquivos/texto.md');
+
+export default getArchive
